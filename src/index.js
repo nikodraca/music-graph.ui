@@ -1,14 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Route, BrowserRouter as Router } from 'react-router-dom';
-import { ColorMapPage } from './pages';
+import { GenreGraphPage } from './pages';
 
 import * as serviceWorker from './serviceWorker';
 
 const router = (
   <Router>
     <div>
-      <Route exact path="/" component={ColorMapPage} />
+      <Route exact path="/" component={GenreGraphPage} />
     </div>
   </Router>
 );

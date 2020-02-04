@@ -1,37 +1,19 @@
 import React from 'react';
-import Graph from 'react-graph-vis';
+import { useHistory } from 'react-router-dom';
 
-import { generateGenreGraph } from '../utils/graph';
+import GenreGraph from '../components/genreGraph.component';
 
 const GenreGraphPage = () => {
-  const genreGraph = generateGenreGraph();
+  const history = useHistory();
 
-  const options = {
-    layout: {
-      hierarchical: false
-    },
-    edges: {
-      color: '#000000'
-    },
-    height: '789px',
-    nodes: {
-      shape: 'box',
-      font: {
-        size: 14,
-        color: '#3f3f3f',
-        // strokeWidth: 3,
-        // strokeColor: 'white',
-        face: 'helvetica'
-      },
-      borderWidth: 2,
-      color: {
-        background: '#d7d7f3',
-        border: '#3030a9'
-      }
-    }
-  };
+  const spotifyAccessToken = localStorage.getItem('spotifyAccessToken');
+  const spotifyUserId = localStorage.getItem('spotifyUserId');
 
-  return <Graph graph={genreGraph} options={options} />;
+  if (!spotifyAccessToken) {
+    history.push('/auth');
+  }
+
+  return <GenreGraph />;
 };
 
 export default GenreGraphPage;

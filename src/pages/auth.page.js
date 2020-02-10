@@ -1,13 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Redirect } from 'react-router-dom';
 
 import actions from '../actions';
-import { Redirect } from 'react-router-dom';
 
 const queryString = require('query-string');
 
-const authUser = ({ actions }) => {
+const authUser = () => {
   var clientId = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
   var redirectUri = process.env.REACT_APP_REDIRECT_URI;
   var scope = 'user-read-private user-read-email user-top-read user-follow-read';

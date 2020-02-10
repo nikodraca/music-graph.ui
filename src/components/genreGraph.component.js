@@ -1,21 +1,22 @@
 import React from 'react';
 import Graph from 'react-graph-vis';
 
-import { generateGenreGraph } from '../utils/graph';
-
-const GenreGraph = () => {
-  const genreGraph = generateGenreGraph();
-
+const GenreGraph = ({ artistGraph }) => {
   const options = {
     layout: {
-      hierarchical: false
+      hierarchical: false,
+      improvedLayout: true
     },
     edges: {
-      color: '#000000'
+      color: '#000000',
+      arrows: {
+        to: false,
+        from: false
+      }
     },
     height: '789px',
     nodes: {
-      shape: 'box',
+      shape: 'circularImage',
       font: {
         size: 14,
         color: '#3f3f3f',
@@ -29,7 +30,9 @@ const GenreGraph = () => {
     }
   };
 
-  return <Graph graph={genreGraph} options={options} />;
+  console.log(artistGraph.toJS());
+
+  return <Graph graph={artistGraph.toJS()} options={options} />;
 };
 
 export default GenreGraph;

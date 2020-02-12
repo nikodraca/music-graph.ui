@@ -1,0 +1,5 @@
+div.vis-network {
+  background-color: #f6f6f7 !important;
+  outline: none;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0); /* mobile webkit */
+}

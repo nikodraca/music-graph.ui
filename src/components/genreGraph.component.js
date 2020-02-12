@@ -1,6 +1,8 @@
 import React from 'react';
 import Graph from 'react-graph-vis';
 
+import './vis.css';
+
 const GenreGraph = ({ artistGraph }) => {
   const options = {
     layout: {
@@ -8,7 +10,7 @@ const GenreGraph = ({ artistGraph }) => {
       improvedLayout: true
     },
     edges: {
-      color: '#000000',
+      color: { color: '#E0E0E2', highlight: 'black' },
       arrows: {
         to: false,
         from: false
@@ -20,17 +22,19 @@ const GenreGraph = ({ artistGraph }) => {
       font: {
         size: 14,
         color: '#3f3f3f',
-        face: 'helvetica'
+        face: 'Lato, sans-serif'
       },
-      borderWidth: 2,
+      borderWidth: 3,
+      borderWidthSelected: 3,
       color: {
         background: '#d7d7f3',
-        border: '#3030a9'
+        border: 'transparent',
+        highlight: {
+          border: 'black'
+        }
       }
     }
   };
-
-  console.log(artistGraph.toJS());
 
   return <Graph graph={artistGraph.toJS()} options={options} />;
 };

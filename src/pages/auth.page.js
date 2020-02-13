@@ -39,11 +39,11 @@ const AuthPage = ({ actions }) => {
       </div>
     );
 
-  actions.fetchSpotifyData(spotifyAccessToken);
+  actions.fetchSpotifyData({ spotifyAccessToken });
 
   return (
     <div>
-      <Redirect to="/">Click here to continue</Redirect>
+      <Redirect to="/graph">Click here to continue</Redirect>
     </div>
   );
 };

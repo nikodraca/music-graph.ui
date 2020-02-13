@@ -46,26 +46,24 @@ const UserProfileText = styled.div`
   flex-direction: column;
 `;
 
-const GenreGraphPage = ({ actions, artistGraph, user }) => {
+const GenreGraphPage = ({ actions, artistGraph, user, match }) => {
   const history = useHistory();
-
-  const spotifyAccessToken = localStorage.getItem('spotifyAccessToken');
-
-  if (!spotifyAccessToken) {
-    history.push('/auth');
-  }
+  const { spotifyUserId } = match.params;
 
   useEffect(() => {
-    if (spotifyAccessToken) {
-      actions.fetchSpotifyData(spotifyAccessToken);
+    if (spotifyUserId && !user) {
+      actions.fetchSpotifyData({ spotifyUserId });
     }
-  }, [spotifyAccessToken, actions]);
+  }, [spotifyUserId, actions, user]);
 
   if (!artistGraph || !user) return 'Loading...';
 
   const userData = user.toJS();
 
-  console.log({ userData });
+  // update url if coming from auth
+  if (!spotifyUserId) {
+    history.push(`/graph/${userData.id}`);
+  }
 
   return (
     <div>

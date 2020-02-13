@@ -20,7 +20,7 @@ const store = createStore(
 const router = (
   <Router>
     <div>
-      <Route exact path="/" component={GenreGraphPage} />
+      <Route path="/graph/:spotifyUserId?" component={GenreGraphPage} />
       <Route exact path="/auth" component={AuthPage} />
     </div>
   </Router>

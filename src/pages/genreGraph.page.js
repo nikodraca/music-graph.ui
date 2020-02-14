@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import GenreGraph from '../components/genreGraph.component';
 import actions from '../actions';
 import Loader from '../components/loader.component';
+import ErrorMessage from '../components/errorMessage.component';
 
 const UserHeader = styled.div`
   display: flex;
@@ -52,7 +53,7 @@ const UserProfileText = styled.div`
   flex-direction: column;
 `;
 
-const GenreGraphPage = ({ actions, artistGraph, user, match }) => {
+const GenreGraphPage = ({ actions, artistGraph, user, match, errorMessage }) => {
   const history = useHistory();
   const { spotifyUserId } = match.params;
 
@@ -62,6 +63,7 @@ const GenreGraphPage = ({ actions, artistGraph, user, match }) => {
     }
   }, [spotifyUserId, actions, user, artistGraph]);
 
+  if (errorMessage) return <ErrorMessage errorMessage={errorMessage} />;
   if (!artistGraph || !user) return <Loader />;
 
   const userData = user.toJS();
@@ -89,7 +91,8 @@ const mapStateToProps = state => {
   return {
     accessToken: state.get('accessToken'),
     artistGraph: state.get('artistGraph'),
-    user: state.get('user')
+    user: state.get('user'),
+    errorMessage: state.get('errorMessage')
   };
 }; //eslint-disable-line
 const mapDispatchToProps = dispatch => ({

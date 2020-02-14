@@ -1,8 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { authUser } from '../utils/auth';
+import UndecoratedLink from '../components/undecoratedLink.component';
+import FlatButton from '../components/flatButton.component';
+import { Link } from 'react-router-dom';
 
 const Container = styled.div`
   display: flex;
@@ -59,24 +61,6 @@ const Paragraph = styled.p`
   }
 `;
 
-const FlatButton = styled.button`
-  width: 200px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  font-family: 'Roboto Mono', monospace;
-  font-size: 1em;
-  border: none;
-
-  @media (max-width: 641px) {
-    width: 100%;
-    height: 50px;
-    justify-content: flex-start;
-    padding-left: 10%;
-  }
-`;
-
 const SpotifyIcon = styled.img`
   height: 25px;
   width: 25px;
@@ -85,11 +69,6 @@ const SpotifyIcon = styled.img`
   @media (max-width: 641px) {
     margin-right: 10%;
   }
-`;
-
-const UndecoratedLink = styled(Link)`
-  text-decoration: none;
-  color: #393d3f;
 `;
 
 const HomePage = () => {
@@ -111,16 +90,11 @@ const HomePage = () => {
         </Paragraph>
         <Paragraph>
           {spotifyUserId && spotifyAccessToken ? (
-            <FlatButton style={{ backgroundColor: '#77ba99' }}>
-              <UndecoratedLink to={`/graph/${spotifyUserId}`}>Start</UndecoratedLink>
-            </FlatButton>
+            <UndecoratedLink path={`/graph/${spotifyUserId}`}>
+              <FlatButton type="spotify">Start</FlatButton>
+            </UndecoratedLink>
           ) : (
-            <FlatButton
-              style={{ backgroundColor: '#1db954' }}
-              onClick={() => {
-                authUser();
-              }}
-            >
+            <FlatButton onClickAction={authUser}>
               <SpotifyIcon src="img/spotify.png" />
               Sign In
             </FlatButton>

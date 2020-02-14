@@ -6,18 +6,24 @@ import styled from 'styled-components';
 
 import GenreGraph from '../components/genreGraph.component';
 import actions from '../actions';
+import Loader from '../components/loader.component';
 
 const UserHeader = styled.div`
   display: flex;
-  width: 98%;
+  width: 33%;
   align-items: center;
   position: fixed;
-  top: 0;
+  bottom: 0;
   left: 0;
   z-index: 1;
   background-color: white;
   margin: 1%;
   border-radius: 10px;
+
+  @media (max-width: 641px) {
+    width: 75%;
+    margin: 5%;
+  }
 `;
 
 const UserDisplayNameHeader = styled.h4`
@@ -29,12 +35,12 @@ const UserDisplayNameHeader = styled.h4`
 
 const UserProfilePicture = styled.img`
   border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  margin: 1.5%;
+  width: 30px;
+  height: 30px;
+  margin: 4%;
 `;
 
-const Title = styled.h2`
+const Title = styled.h3`
   font-family: 'Muli', sans-serif;
   font-weight: 700;
   color: black;
@@ -51,12 +57,12 @@ const GenreGraphPage = ({ actions, artistGraph, user, match }) => {
   const { spotifyUserId } = match.params;
 
   useEffect(() => {
-    if (spotifyUserId && !user) {
+    if (spotifyUserId && (!user || !artistGraph)) {
       actions.fetchSpotifyData({ spotifyUserId });
     }
-  }, [spotifyUserId, actions, user]);
+  }, [spotifyUserId, actions, user, artistGraph]);
 
-  if (!artistGraph || !user) return 'Loading...';
+  if (!artistGraph || !user) return <Loader />;
 
   const userData = user.toJS();
 
@@ -74,7 +80,7 @@ const GenreGraphPage = ({ actions, artistGraph, user, match }) => {
           <UserDisplayNameHeader>{userData.displayName}</UserDisplayNameHeader>
         </UserProfileText>
       </UserHeader>
-      <GenreGraph artistGraph={artistGraph} style />;
+      <GenreGraph artistGraph={artistGraph} style />
     </div>
   );
 };

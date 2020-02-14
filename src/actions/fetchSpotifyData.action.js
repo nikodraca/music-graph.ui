@@ -16,6 +16,8 @@ export default ({ spotifyAccessToken, spotifyUserId }) => {
       }
     });
 
+    localStorage.setItem('spotifyUserId', response.user.id);
+
     return dispatch({
       type: 'STORE_SPOTIFY_RESPONSE',
       payload: response

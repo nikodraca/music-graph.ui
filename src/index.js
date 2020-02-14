@@ -5,7 +5,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 
-import { GenreGraphPage, AuthPage } from './pages';
+import { HomePage, GenreGraphPage, AuthPage } from './pages';
 import reducers from './reducers';
 
 import * as serviceWorker from './serviceWorker';
@@ -20,6 +20,7 @@ const store = createStore(
 const router = (
   <Router>
     <div>
+      <Route exact path="/" component={HomePage} />
       <Route path="/graph/:spotifyUserId?" component={GenreGraphPage} />
       <Route exact path="/auth" component={AuthPage} />
     </div>

@@ -41,6 +41,14 @@ const UserProfilePicture = styled.img`
   margin: 4%;
 `;
 
+const PlaceHolderIcon = styled.div`
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  margin: 4%;
+  background-color: #919098;
+`;
+
 const Title = styled.h3`
   font-family: 'Muli', sans-serif;
   font-weight: 700;
@@ -76,7 +84,7 @@ const GenreGraphPage = ({ actions, artistGraph, user, match, errorMessage }) => 
   return (
     <div>
       <UserHeader>
-        <UserProfilePicture src={userData.profilePicture} />
+        {userData.UserProfilePicture ? <UserProfilePicture src={userData.UserProfilePicture} /> : <PlaceHolderIcon />}
         <UserProfileText>
           <Title>Music Graph</Title>
           <UserDisplayNameHeader>{userData.displayName}</UserDisplayNameHeader>

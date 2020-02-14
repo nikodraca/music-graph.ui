@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { authUser } from '../utils/auth';
 import UndecoratedLink from '../components/undecoratedLink.component';
 import FlatButton from '../components/flatButton.component';
-import { Link } from 'react-router-dom';
 
 const Container = styled.div`
   display: flex;

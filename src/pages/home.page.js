@@ -51,7 +51,7 @@ const BigHeader = styled.h1`
 `;
 
 const Paragraph = styled.p`
-  padding: 5%;
+  padding: 2%;
   font-family: 'Roboto Mono', monospace;
   color: #393d3f;
 
@@ -80,13 +80,24 @@ const HomePage = () => {
       <Column>
         <Paragraph>
           Visualize your taste in music. <u>Music Graph</u> uses your Spotify data to generate a graph of your top
-          artists and how they relate to each other, creating a map of your taste in music. Artist with common genres
-          are linked together. Artists that are floating alone have no related artists - these are real deep cuts.
+          artists and how they relate to each other, creating a map of your taste in music.
         </Paragraph>
         <Paragraph>
-          Clicking on an artist will highlight the related artists. Scrolling or pinching will zoom in. Feel free to
-          zoom and in and move around - get a real feel for your taste in music.
+          Artist with common genres are linked together. Artists that are floating alone have no related artists - these
+          are anomalies.
         </Paragraph>
+        <Paragraph>
+          Clicking on an artist will highlight the related artists. Scrolling or pinching will zoom in. Zoom and in and
+          move around, dive deep into these relationships.
+        </Paragraph>
+
+        <Paragraph>
+          -{' '}
+          <a style={{ color: 'black' }} href="https://www.nikodraca.com/">
+            Niko Draca
+          </a>
+        </Paragraph>
+
         <Paragraph>
           {spotifyUserId && spotifyAccessToken ? (
             <UndecoratedLink path={`/graph/${spotifyUserId}`}>

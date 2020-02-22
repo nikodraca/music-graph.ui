@@ -39,7 +39,7 @@ const AuthPage = ({ actions }) => {
       </div>
     );
 
-  actions.fetchSpotifyData({ spotifyAccessToken });
+  actions.fetchSpotifyData({ spotifyAccessToken, isAuthFlow: true });
 
   return (
     <div>

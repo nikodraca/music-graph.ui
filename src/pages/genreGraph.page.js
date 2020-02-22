@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -8,22 +8,23 @@ import GenreGraph from '../components/genreGraph.component';
 import actions from '../actions';
 import Loader from '../components/loader.component';
 import ErrorMessage from '../components/errorMessage.component';
+import { ChevronDown } from 'react-feather';
 
 const UserHeader = styled.div`
   display: flex;
-  width: 33%;
+  width: 99%;
   align-items: center;
   position: fixed;
-  bottom: 0;
+  top: 0;
   left: 0;
   z-index: 1;
   background-color: white;
-  margin: 1%;
-  border-radius: 10px;
+  padding: 0.5%;
+  justify-content: space-between;
 
   @media (max-width: 641px) {
-    width: 75%;
-    margin: 5%;
+    width: 94%;
+    padding: 3%;
   }
 `;
 
@@ -38,7 +39,6 @@ const UserProfilePicture = styled.img`
   border-radius: 50%;
   width: 30px;
   height: 30px;
-  margin: 4%;
 `;
 
 const PlaceHolderIcon = styled.div`
@@ -56,14 +56,35 @@ const Title = styled.h3`
   margin: 0;
 `;
 
-const UserProfileText = styled.div`
-  display: flex;
-  flex-direction: column;
+const OptionsDropdown = styled.div`
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 1;
+  background-color: white;
+  padding: 1% 2%;
+  margin-top: 50px;
+  margin-right: 5px;
+  border-radius: 5px;
+  font-family: 'Muli', sans-serif;
+
+  @media (max-width: 641px) {
+    margin-top: 70px;
+  }
+`;
+
+const DropdownItem = styled.div`
+  font-family: 'Muli', sans-serif;
+  font-size: 14px;
+  margin-bottom: 5%;
+  cursor: pointer;
 `;
 
 const GenreGraphPage = ({ actions, artistGraph, user, match, errorMessage }) => {
+  const [showLogout, setShowLogout] = useState(false);
   const history = useHistory();
   const { spotifyUserId } = match.params;
+  const authedUserId = localStorage.getItem('spotifyUserId');
 
   useEffect(() => {
     if (spotifyUserId && (!user || !artistGraph)) {
@@ -84,12 +105,32 @@ const GenreGraphPage = ({ actions, artistGraph, user, match, errorMessage }) => 
   return (
     <div>
       <UserHeader>
-        {userData.profilePicture ? <UserProfilePicture src={userData.profilePicture} /> : <PlaceHolderIcon />}
-        <UserProfileText>
-          <Title>Music Graph</Title>
-          <UserDisplayNameHeader>{userData.displayName}</UserDisplayNameHeader>
-        </UserProfileText>
+        <Title>Music Graph</Title>
+        <UserDisplayNameHeader>{userData.displayName}</UserDisplayNameHeader>
+        <div
+          onClick={() => {
+            if (spotifyUserId === authedUserId) {
+              setShowLogout(!showLogout);
+            }
+          }}
+        >
+          {userData.profilePicture ? <UserProfilePicture src={userData.profilePicture} /> : <PlaceHolderIcon />}
+          {spotifyUserId === authedUserId && <ChevronDown />}
+        </div>
       </UserHeader>
+      {showLogout && (
+        <OptionsDropdown>
+          {/* <DropdownItem>Share</DropdownItem> TODO: figure out what share will do */}
+          <DropdownItem
+            onClick={() => {
+              actions.logOut();
+              history.push(`/`);
+            }}
+          >
+            Log Out
+          </DropdownItem>
+        </OptionsDropdown>
+      )}
       <GenreGraph artistGraph={artistGraph} style />
     </div>
   );

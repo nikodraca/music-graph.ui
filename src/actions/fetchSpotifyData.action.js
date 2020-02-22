@@ -1,6 +1,6 @@
 import * as rp from 'request-promise';
 
-export default ({ spotifyAccessToken, spotifyUserId }) => {
+export default ({ spotifyAccessToken, spotifyUserId, isAuthFlow }) => {
   return async dispatch => {
     dispatch({
       type: 'SHOW_ERROR',
@@ -23,7 +23,13 @@ export default ({ spotifyAccessToken, spotifyUserId }) => {
         resolveWithFullResponse: true
       });
 
-      localStorage.setItem('spotifyUserId', response.body.user.id);
+      /**
+       * If user is making requests as part of auth flow, store their ID
+       * the auth response from Spotify does not include user ID so we don't know until this response comes back
+       */
+      if (isAuthFlow) {
+        localStorage.setItem('spotifyUserId', response.body.user.id);
+      }
 
       return dispatch({
         type: 'STORE_SPOTIFY_RESPONSE',

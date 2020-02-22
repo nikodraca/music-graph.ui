@@ -47,6 +47,7 @@ const BigHeader = styled.h1`
   @media (max-width: 641px) {
     font-size: 5em;
     margin-bottom: 5%;
+    margin-top: 5%;
   }
 `;
 

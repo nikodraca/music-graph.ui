@@ -84,7 +84,7 @@ const GenreGraphPage = ({ actions, artistGraph, user, match, errorMessage }) => 
   return (
     <div>
       <UserHeader>
-        {userData.UserProfilePicture ? <UserProfilePicture src={userData.UserProfilePicture} /> : <PlaceHolderIcon />}
+        {userData.profilePicture ? <UserProfilePicture src={userData.profilePicture} /> : <PlaceHolderIcon />}
         <UserProfileText>
           <Title>Music Graph</Title>
           <UserDisplayNameHeader>{userData.displayName}</UserDisplayNameHeader>

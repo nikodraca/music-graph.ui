@@ -22,7 +22,7 @@ const GenreGraph = ({ artistGraph }) => {
       font: {
         size: 14,
         color: '#3f3f3f',
-        face: 'Lato, sans-serif'
+        face: 'Muli'
       },
       borderWidth: 3,
       borderWidthSelected: 3,

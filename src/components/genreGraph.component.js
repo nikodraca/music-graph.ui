@@ -14,7 +14,8 @@ const GenreGraph = ({ artistGraph }) => {
       arrows: {
         to: false,
         from: false
-      }
+      },
+      length: 200
     },
     height: '789px',
     nodes: {

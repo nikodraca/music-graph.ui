@@ -1,20 +1,24 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Route, BrowserRouter as Router } from 'react-router-dom';
-import { createStore, applyMiddleware, compose } from 'redux';
-import thunk from 'redux-thunk';
-import { Provider } from 'react-redux';
+import React from "react";
+import ReactDOM from "react-dom";
+import { Route, BrowserRouter as Router } from "react-router-dom";
+import { createStore, applyMiddleware, compose } from "redux";
+import thunk from "redux-thunk";
+import { Provider } from "react-redux";
+import HttpsRedirect from "react-https-redirect";
 
-import { HomePage, GenreGraphPage, AuthPage } from './pages';
-import reducers from './reducers';
+import { HomePage, GenreGraphPage, AuthPage } from "./pages";
+import reducers from "./reducers";
 
-import * as serviceWorker from './serviceWorker';
+import * as serviceWorker from "./serviceWorker";
 
-require('dotenv').config();
+require("dotenv").config();
 
 const store = createStore(
   reducers,
-  compose(applyMiddleware(thunk), window.devToolsExtension ? window.devToolsExtension() : f => f)
+  compose(
+    applyMiddleware(thunk),
+    window.devToolsExtension ? window.devToolsExtension() : f => f
+  )
 );
 
 const router = (
@@ -27,7 +31,12 @@ const router = (
   </Router>
 );
 
-ReactDOM.render(<Provider store={store}>{router}</Provider>, document.getElementById('root'));
+ReactDOM.render(
+  <HttpsRedirect>
+    <Provider store={store}>{router}</Provider>
+  </HttpsRedirect>,
+  document.getElementById("root")
+);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
